@@ -7,6 +7,9 @@
 body{
     margin-left: 15vw;
     margin-right: 15vw;
+    min-height: 97vh;
+    display: flex;
+    flex-direction: column;
 }
 #texto{
     display: flex;
@@ -69,4 +72,18 @@ button{cursor: pointer;}
     margin: 20px;
 }
 
+#codregister{
+    border: 2px solid #36363634;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+}
 
+footer{
+    display: flex;
+    justify-content: center;
+    margin-top:auto;
+    width: 100%;
+    font-size: 15px;
+    color: #0000008e;
+}
