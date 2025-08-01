@@ -293,6 +293,7 @@ footer{
     font-size: 15px;
     padding: 1rem 0;
   }
+  
 
   #add {
     flex-direction: column;
@@ -301,7 +302,7 @@ footer{
 
   #novocodigo,
   #adicionar {
-    width: 100%;
+    width: 90%;
   }
 
   .codigo-item {
@@ -355,6 +356,7 @@ footer{
 
   #novocodigo {
     font-size: 14px;
+    width: 90%;
   }
 
   #adicionar {
