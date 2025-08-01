@@ -275,3 +275,101 @@ footer{
     font-size: 15px;
     color: #0000008e;
 }
+
+@media (max-width: 1024px) {
+  body {
+    margin-left: 8vw;
+    margin-right: 8vw;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    margin-left: 4vw;
+    margin-right: 4vw;
+  }
+
+  #texto {
+    font-size: 15px;
+    padding: 1rem 0;
+  }
+
+  #add {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #novocodigo,
+  #adicionar {
+    width: 100%;
+  }
+
+  .codigo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .info-codigo {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .info-codigo .codigo {
+    font-size: 13px;
+  }
+
+  .botoes-codigo {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .botoes-codigo button,
+  .botoes-codigo .eliminar {
+    font-size: 14px;
+    min-width: auto;
+    min-height: auto;
+    padding: 6px 12px;
+  }
+
+  .quantidade {
+    font-size: 18px;
+  }
+
+  #total {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  footer {
+    font-size: 12px;
+    text-align: center;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  #texto {
+    font-size: 13px;
+  }
+
+  #novocodigo {
+    font-size: 14px;
+  }
+
+  #adicionar {
+    font-size: 14px;
+  }
+
+  .botoes-codigo button {
+    font-size: 13px;
+  }
+
+  .quantidade {
+    font-size: 16px;
+  }
+
+  footer {
+    font-size: 11px;
+  }
+}
