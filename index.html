@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="PT-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contador Full</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="style.css"> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="images/gc-logo.jpg">
+    </head>
 <body>
-    <span id="texto">Contador de Códigos de Barra Full</span>
+    <h1 id="texto">Contador de Códigos de Barra Full</h1>
+        <div id="ultima-alteracao">Última alteração: nunca</div>
     
         <div id="insertcodes">
             <Span id="addcode">Adicionar Código de Barras</Span>
-            <div id="add">
-            <input type="text" id="novocodigo" placeholder="Digite o Código de Barras...">
-            <button id="adicionar">+ Adicionar</div>
+                <div id="add">
+                    <input type="text" id="novocodigo" placeholder="Digite o Código de Barras...">
+                        <button id="adicionar" >+ Adicionar</button>
+                </div>
         </div>
     
     <div id="total">
@@ -29,16 +31,17 @@
             <span class="total">Códigos Unicos</span>
             <span class="quantidade">0</span>
         </div>
-        <button id="limpar">Limpar Tudo</button>
+        <button id="limpar" class="eliminar" >Limpar Tudo</button> 
     </div>
 
     <div id="codregister">
         <span>Códigos Registrados</span>
-        <div></div>
+        <div id="codes"></div>
     </div>
     
+    <footer>
+        <section id="direitos"> © 2025 Nicolas Biano Luvisuto. Todos os direitos reservados.</section>
+    </footer>
+    <script src="script.js"></script>
 </body>
-<footer>
-    <section id="direitos"> © 2025 Nicolas Biano Luvisuto. Todos os direitos reservados.</section>
-</footer>
 </html>
