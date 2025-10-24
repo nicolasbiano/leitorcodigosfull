@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  // Carrega o arquivo produtos.json
   const resposta = await fetch("produtos.json");
   const produtos = await resposta.json();
 
   console.log("Produtos carregados:", produtos);
-
-  // ====== SEU CÓDIGO COMEÇA AQUI ======
 
   const input = document.getElementById("novocodigo");
   const addButton = document.getElementById("adicionar");
@@ -68,21 +65,21 @@ document.addEventListener("DOMContentLoaded", async function () {
       // Dados do produto
       const produto = produtos[codigo];
       const nomeProduto = produto ? produto.nome : "Produto não cadastrado";
-      const codInterno = produto ? produto.codinterno : "-";
+      const SKU = produto ? produto.SKU : "-";
 
       // Nome e código interno
       const spanNome = document.createElement("span");
       spanNome.textContent = nomeProduto;
       spanNome.classList.add("nome");
 
-      const spanCodinterno = document.createElement("span");
-      spanCodinterno.textContent = `Cód. Interno - ${codInterno}`;
-      spanCodinterno.classList.add("cod-interno");
+      const spanSKU = document.createElement("span");
+      spanSKU.textContent = `SKU - ${SKU}`;
+      spanSKU.classList.add("cod-interno");
 
       infoCodigo.appendChild(spanQtd);
       infoCodigo.appendChild(spanCodigo);
       infoCodigo.appendChild(spanNome);
-      infoCodigo.appendChild(spanCodinterno);
+      infoCodigo.appendChild(spanSKU);
 
       // Botões
       const botoesContainer = document.createElement("div");
@@ -155,6 +152,4 @@ document.addEventListener("DOMContentLoaded", async function () {
     atualizarContadores();
     localStorage.removeItem("codigos");
   });
-
-  // ====== FIM DO SEU CÓDIGO ======
 });
