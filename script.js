@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   function adicionarCodigo(codigo) {
     if (codigo.trim() === "") return;
-    if (Object.keys(codigos).length >= 15 && !(codigo in codigos)) return;
+    if (Object.keys(codigos).length >= 25 && !(codigo in codigos)) return;
 
     codigos[codigo] = (codigos[codigo] || 0) + 1;
     input.value = "";
