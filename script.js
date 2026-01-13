@@ -1,8 +1,33 @@
-document.addEventListener("DOMContentLoaded", async function () {
-  const resposta = await fetch("produtos.json");
-  const produtos = await resposta.json();
+export const firebaseConfig = {
+  apiKey: "AIzaSyCMOOpIoaurHT2CyhHEN4vZxGmzedhaIwM",
+  authDomain: "separacaofull.firebaseapp.com",
+  databaseURL: "https://separacaofull-default-rtdb.firebaseio.com",
+  projectId: "separacaofull",
+  storageBucket: "separacaofull.firebasestorage.app",
+  messagingSenderId: "137169730444",
+  appId: "1:137169730444:web:0ed636854db0fe6f4734a9",
+  measurementId: "G-LVQ56WFB5G"
+};
 
-  console.log("Produtos carregados:", produtos);
+import { doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+document.addEventListener("DOMContentLoaded", async function () {
+  // Carregar produtos do Firestore
+  let produtos = {};
+  if (window.db) {
+    const db = window.db;
+    try {
+      const querySnapshot = await getDocs(collection(db, "produtos"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const barcode = data.codigoFull || doc.id; // Use codigoFull se existir, senão doc.id
+        produtos[barcode] = data;
+      });
+      console.log("Produtos carregados do Firestore:", produtos);
+    } catch (error) {
+      console.error("Erro ao carregar produtos do Firestore:", error);
+    }
+  }
 
   const input = document.getElementById("novocodigo");
   const addButton = document.getElementById("adicionar");
@@ -13,27 +38,53 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   let codigos = {};
 
-  // Carrega dados salvos
-  const dadosSalvos = localStorage.getItem("codigos");
-  if (dadosSalvos) {
-    codigos = JSON.parse(dadosSalvos);
+  // Aguarde o Firebase carregar (window.db estará disponível)
+  if (!window.db) {
+    console.error("Firebase não inicializado.");
+    return;
+  }
+  const db = window.db;
+
+  // Função para salvar no Firestore
+  async function salvarNoFirestore() {
+    try {
+      await setDoc(doc(db, "codigos", "usuario-padrao"), { // Use um ID único, ex.: UID do usuário
+        codigos: codigos,
+        ultimaAlteracao: new Date().toISOString()
+      });
+      console.log("Dados salvos no Firestore.");
+    } catch (error) {
+      console.error("Erro ao salvar:", error);
+    }
   }
 
+  // Função para carregar do Firestore
+  async function carregarDoFirestore() {
+    try {
+      const docSnap = await getDoc(doc(db, "codigos", "usuario-padrao"));
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        codigos = data.codigos || {};
+        atualizarDataAlteracao(data.ultimaAlteracao);
+      }
+    } catch (error) {
+      console.error("Erro ao carregar:", error);
+    }
+  }
+
+  // Carregue dados do Firestore
+  await carregarDoFirestore();
   renderizarCodigos();
   atualizarContadores();
-  atualizarDataAlteracao();
 
-  function salvarNoLocalStorage() {
-    localStorage.setItem("codigos", JSON.stringify(codigos));
-    const dataAtual = new Date().toLocaleString("pt-BR");
-    localStorage.setItem("ultimaAlteracao", dataAtual);
-    atualizarDataAlteracao();
-  }
-
-  function atualizarDataAlteracao() {
-    const ultimaAlteracao = localStorage.getItem("ultimaAlteracao");
+  function atualizarDataAlteracao(ultimaAlteracao) {
     const divAlteracao = document.getElementById("ultima-alteracao");
-    divAlteracao.textContent = `Última alteração: ${ultimaAlteracao || "nunca"}`;
+    if (ultimaAlteracao) {
+      const data = new Date(ultimaAlteracao).toLocaleString("pt-BR");
+      divAlteracao.textContent = `Última alteração: ${data}`;
+    } else {
+      divAlteracao.textContent = "Última alteração: nunca";
+    }
   }
 
   function atualizarContadores() {
@@ -65,7 +116,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       // Dados do produto
       const produto = produtos[codigo];
       const nomeProduto = produto ? produto.nome : "Produto não cadastrado";
-      const SKU = produto ? produto.SKU : "-";
+      const SKU = produto ? (produto.SKU || produto.sku) : "-";
 
       // Nome e código interno
       const spanNome = document.createElement("span");
@@ -93,7 +144,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         else delete codigos[codigo];
         renderizarCodigos();
         atualizarContadores();
-        salvarNoLocalStorage();
+        salvarNoFirestore();
       };
 
       const btnMais = document.createElement("button");
@@ -103,7 +154,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         codigos[codigo]++;
         renderizarCodigos();
         atualizarContadores();
-        salvarNoLocalStorage();
+        salvarNoFirestore();
       };
 
       const btnExcluir = document.createElement("button");
@@ -113,7 +164,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         delete codigos[codigo];
         renderizarCodigos();
         atualizarContadores();
-        salvarNoLocalStorage();
+        salvarNoFirestore();
       };
 
       botoesContainer.appendChild(btnMenos);
@@ -134,7 +185,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     input.value = "";
     renderizarCodigos();
     atualizarContadores();
-    salvarNoLocalStorage();
+    salvarNoFirestore();
   }
 
   addButton.addEventListener("click", () => adicionarCodigo(input.value));
@@ -150,6 +201,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     codigos = {};
     renderizarCodigos();
     atualizarContadores();
-    localStorage.removeItem("codigos");
+    salvarNoFirestore(); // Ou delete o documento se quiser limpar completamente
   });
 });

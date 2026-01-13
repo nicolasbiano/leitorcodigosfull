@@ -42,6 +42,30 @@
     <footer>
         <section id="direitos"> © 2025 Nicolas Biano Luvisuto. Todos os direitos reservados.</section>
     </footer>
-    <script src="script.js"></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+      import { getFirestore } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+      // Substitua pela sua configuração do Firebase (do outro site)
+        export const firebaseConfig = {
+        apiKey: "AIzaSyCMOOpIoaurHT2CyhHEN4vZxGmzedhaIwM",
+        authDomain: "separacaofull.firebaseapp.com",
+        databaseURL: "https://separacaofull-default-rtdb.firebaseio.com",
+        projectId: "separacaofull",
+        storageBucket: "separacaofull.firebasestorage.app",
+        messagingSenderId: "137169730444",
+        appId: "1:137169730444:web:0ed636854db0fe6f4734a9",
+        measurementId: "G-LVQ56WFB5G"
+        };
+
+      // Inicialize o Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Torne o db global para usar no script.js
+      window.db = db;
+    </script>
+    <!-- Script temporário para upload - REMOVA após a primeira execução -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
