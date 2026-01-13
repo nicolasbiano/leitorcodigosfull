@@ -1,14 +1,3 @@
-export const firebaseConfig = {
-  apiKey: "AIzaSyCMOOpIoaurHT2CyhHEN4vZxGmzedhaIwM",
-  authDomain: "separacaofull.firebaseapp.com",
-  databaseURL: "https://separacaofull-default-rtdb.firebaseio.com",
-  projectId: "separacaofull",
-  storageBucket: "separacaofull.firebasestorage.app",
-  messagingSenderId: "137169730444",
-  appId: "1:137169730444:web:0ed636854db0fe6f4734a9",
-  measurementId: "G-LVQ56WFB5G"
-};
-
 import { doc, setDoc, getDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
