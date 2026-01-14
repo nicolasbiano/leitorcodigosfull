@@ -136,10 +136,10 @@ button{cursor: pointer;}
 }
 
 .eliminar{
-    background-color: #ff0000;
+    background-color: #004e9b;
     color: #ffffff;
     border-radius: 7px;
-    border: #ff0000;
+    border: #004e9b;
     font-size: 15px;
     justify-content: space-between;
 
@@ -238,7 +238,7 @@ button{cursor: pointer;}
 }
 
 .botoes-codigo .eliminar {
-    background: #e53949;
+    background: #004e9b;
     color: #fff;
     border: none;
     font-size: 18px;
@@ -250,11 +250,11 @@ button{cursor: pointer;}
 }
 
 .botoes-codigo .eliminar:hover {
-    background: #c62838;
+    background: #183264;
 }
 
 #limpar.eliminar {
-    background: #e53949;
+    background: #004e9b;
     color: #fff;
     border: none;
     font-size: 16px;
@@ -264,7 +264,7 @@ button{cursor: pointer;}
 }
 
 #limpar.eliminar:hover {
-    background: #c62838;
+    background: #183264;
 }
 
 footer{
